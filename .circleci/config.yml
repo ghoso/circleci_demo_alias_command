@@ -8,13 +8,14 @@ jobs:
   save-hello-world-output:
     docker:
       - image: cimg/base:stable
+    working_directory: /tmp
     steps:
       - checkout
       - run:
           name: "output hello world"
           command: "echo Hello, World! > output.txt"
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: workspace
           paths:
             - output.txt
   print-output-file:
@@ -25,7 +26,7 @@ jobs:
           at: /tmp/workspace
       - run:
           name: "read from workspace"
-          command: "cat /tmp/workdpace/output.txt"
+          command: "cat /tmp/workspace/output.txt"
 workflows:
   say-hello-workflow:
     jobs:
