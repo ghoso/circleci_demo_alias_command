@@ -11,6 +11,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "make directory for output file"
+          command: "mkdir -p /tmp/workspace"
+      - run:
           name: "output hello world"
           command: "echo Hello, World! > /tmp/workspace/output.txt"
       - persist_to_workspace:
