@@ -15,7 +15,8 @@ jobs:
           command: "echo Hello, World! > output.txt"
       - persist_to_workspace:
           root: .
-          paths: .
+          paths:
+            - .
   print-output-file:
     docker:
       - image: cimg/base:stable
