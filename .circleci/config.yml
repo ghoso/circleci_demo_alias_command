@@ -1,21 +1,16 @@
 version: 2.1
 
 commands:
-  print_pipeline_id:
-    description: "print pipeline id"
-    parameters:
-      id:
-        type: string
-    steps:
-      - run: echo << parameters.id >>
 jobs:
-  print_workflow_id:
+  yield_fail:
     docker:
       - image: cimg/node:13.8.0
     steps:
-      - print_pipeline_id:
-          id: << pipeline.id >>
+      - run: return 1
+      - run:
+          command: echo "job failed !!"
+          when: on_fail
 workflows:
   print-workflow:
     jobs:
-      - print_workflow_id
+      - yield_fail
